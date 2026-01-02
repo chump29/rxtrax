@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RxTrax</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="icon" href="./rx.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
+  </head>
+  <body class="dark:bg-gray-800">
+    <header
+      id="header"
+      class="fixed top-2 right-2 text-gray-600 text-xs"></header>
+    <main>
+      <div
+        class="font-bold text-[#00cc00] text-7xl text-center font-[Chango] pt-10">
+        <img src="rx.png" alt="RxTrax" class="mx-auto inline">
+        RxTrax
+      </div>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <div id="root"></div>
+      <script type="module" src="./src/main.tsx"></script>
+      <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/19.2.4/autocomplete-lhc.min.js"></script>
+      <script>
+        $(function () {
+          new Def.Autocompleter.Prefetch("rxStrength", [])
+          new Def.Autocompleter.Search(
+            "rxName",
+            "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS"
+          )
+          Def.Autocompleter.Event.observeListSelections("rxName", function () {
+            const autocomp = $("#rxName")[0].autocomp
+            const item = autocomp.getSelectedItemData()[0]
+            const strength = $("#rxStrength")
+            if (item.data) {
+              strength[0].autocomp.setListAndField(
+                item.data["STRENGTHS_AND_FORMS"],
+                ""
+              )
+              strength.attr("data-state", "valid")
+            } else {
+              strength[0].autocomp.setListAndField("")
+              strength.attr("data-state", "invalid")
+            }
+          })
+        })
+      </script>
+    </main>
+    <footer
+      class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-[100%]">
+      Copyright &copy;
+      <span id="year"></span>
+      <a
+        id="copyright"
+        href="http://www.postfmly.com"
+        target="_blank"
+        class="underline text-sky-500 hover:text-sky-400"
+        title="www.postfmly.com">
+        postfmly.com
+      </a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+services:
+  rx-frontend:
+    container_name: rx-frontend
+    image: rx-frontend
+    restart: unless-stopped
+    depends_on:
+      - rx-backend
+    ports:
+      - "90:80"
+    environment:
+      - TZ=America/Chicago
+    labels:
+      - wud.watch=false
+      - dockge.imageupdates.check=false
+      - homepage.group=Personal
+      - homepage.name=RxTrax
+      - homepage.icon=https://rx.postfmly.com/rx.png
+      - homepage.href=https://rx.postfmly.com/
+      - homepage.description=rx.postfmly.com
+
+  rx-backend:
+    container_name: rx-backend
+    image: rx-backend
+    restart: unless-stopped
+    ports:
+      - "5556:5556"
+    labels:
+      - wud.watch=false
+      - dockge.imageupdates.check=false
+    stop_signal: SIGINT
+networks: {}
+
+x-dockge:
+  urls:
+    - https://rx.postfmly.com
