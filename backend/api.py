@@ -8,7 +8,7 @@ from tomllib import load
 from fastapi import FastAPI
 from uvicorn import run
 
-from db import add as c, create, delete as d, get as r, Med, update as u
+from db import add as c, create, delete as d, get as r, Med
 
 
 api = FastAPI()
@@ -19,19 +19,13 @@ create()
 @api.post("/api/add")
 def add(med: Med):
     """Add medication"""
-    c(med)
+    return c(med)
 
 
 @api.get("/api/get")
 def get():
     """Get medication"""
     return r()
-
-
-@api.put("/api/update")
-def update(med: Med):
-    """Update medication"""
-    u(med)
 
 
 @api.delete("/api/delete/{pk}")

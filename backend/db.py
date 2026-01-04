@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 DB_FILE = "rx.db"
 
-DEBUG = False
+DEBUG = True
 
 
 class Med(BaseModel):
@@ -50,7 +50,7 @@ def add(med: Med):  # c
     """Add medication"""
     if DEBUG:
         print(f"Adding row: {med.medication}, {med.strength}")
-    Rx.create(medication=med.medication, strength=med.strength)
+    return Rx.create(medication=med.medication, strength=med.strength)
 
 
 def get():  # r
@@ -58,15 +58,6 @@ def get():  # r
     if DEBUG:
         print(f"Getting rows: {Rx.select().count(None)}")
     return list(Rx.select().dicts())
-
-
-def update(med: Med):  # u
-    """Update medication"""
-    if DEBUG:
-        print(f"Updating row: {med.pk}, {med.medication}, {med.strength}")
-    Rx.update(medication=med.medication, strength=med.strength).where(
-        Rx.id == med.pk
-    ).execute()
 
 
 def delete(pk: int):  # d

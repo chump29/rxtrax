@@ -2,37 +2,18 @@ import { useState, type ChangeEvent } from "react"
 
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline"
 
+import { handleX, setVisible } from "../../helpers/handle"
+import type Med from "../../interfaces/Med"
+
 const api_url = import.meta.env.VITE_API_URL || ""
 
-export interface Med {
-  medication: string
-  strength: string
-}
-
-function setVisible(id: string, isVisibility = true) {
-  document.getElementById(id)!.style.visibility = isVisibility
-    ? "visible"
-    : "hidden"
-}
-
-export function handleX(obj: string) {
-  const rxName = document.getElementById("rxName") as HTMLInputElement
-  if (obj === "rxName" && rxName.value) {
-    rxName.value = ""
-    ;(
-      document.getElementById("txtStrength") as HTMLDivElement
-    ).style.visibility = "hidden"
-    rxName.focus()
-  }
-  const rxStrength = document.getElementById("rxStrength") as HTMLInputElement
-  if (obj === "rxStrength" && rxStrength.value) {
-    rxStrength.value = ""
-    rxStrength.focus()
-    setVisible("btnAdd", false)
-  }
-}
-
-export function Meds({ id, className }: { id: string; className: string }) {
+export default function Meds({
+  id,
+  className
+}: {
+  id: string
+  className: string
+}) {
   const [name, setName] = useState("")
   const [strength, setStrength] = useState("")
 
@@ -52,25 +33,24 @@ export function Meds({ id, className }: { id: string; className: string }) {
     }
   }
 
-  async function handleClick() {
+  function handleAdd() {
     try {
-      await fetch(api_url + "/api/add", {
+      fetch(api_url + "/api/add", {
         method: "POST",
         signal: AbortSignal.timeout(3000),
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
           medication: name,
           strength: strength
         } as Med)
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Status: ${response.status}`)
+        }
+        window.location.reload()
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Status: ${response.status}`)
-          }
-          response.json()
-        })
-        .then((data) => {
-          console.log(data)
-        })
     } catch (e) {
       console.log(e)
     }
@@ -116,7 +96,7 @@ export function Meds({ id, className }: { id: string; className: string }) {
         <div id="btnAdd" className="text-center mt-10 invisible">
           <button
             type="button"
-            onClick={handleClick}
+            onClick={handleAdd}
             title="Add medication and strength"
             className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold">
             <PlusCircleIcon className="size-6 inline text-green-500" /> Add
