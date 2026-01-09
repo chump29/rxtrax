@@ -27,7 +27,7 @@ echo -e "${_lint} ${_green}Linting${_nc}:"
 ./lint.sh
 
 echo -e "\n${_test} ${_green}Testing${_nc}:\n"
-#./test.sh # TODO
+./test.sh
 
 echo -e "\n${_stop} ${_green}Deactivating virtual environment${_nc}\n"
 deactivate

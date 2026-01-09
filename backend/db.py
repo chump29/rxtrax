@@ -10,13 +10,14 @@ from pydantic import BaseModel
 
 DB_FILE = "rx.db"
 
-DEBUG = True
+DEBUG = False
 
 
 class Med(BaseModel):
     """Rx data model"""
 
     pk: int | None = None
+    name: str
     medication: str
     strength: str
 
@@ -25,6 +26,7 @@ class Rx(Model):
     """Rx DB model"""
 
     id = AutoField()
+    name = CharField(null=False)
     medication = CharField(null=False)
     strength = CharField(null=False)
 
@@ -49,14 +51,14 @@ def create():
 def add(med: Med):  # c
     """Add medication"""
     if DEBUG:
-        print(f"Adding row: {med.medication}, {med.strength}")
-    return Rx.create(medication=med.medication, strength=med.strength)
+        print(f"Adding row: {med.name}, {med.medication}, {med.strength}")
+    return Rx.create(name=med.name, medication=med.medication, strength=med.strength)
 
 
-def get():  # r
+def get(name: str):  # r
     """Get medication"""
     if DEBUG:
-        print(f"Getting rows: {Rx.select().count(None)}")
+        print(f"Getting rows: {Rx.select(Rx.name == name).count(None)}")
     return list(Rx.select().dicts())
 
 

@@ -1,6 +1,6 @@
 {
   "name": "rx-frontend",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Prescription medication tracker (Frontend)",
   "homepage": "https://github.com/chump29/rx",
   "license": "GPL-3.0-only",
@@ -26,6 +26,7 @@
     "@heroicons/react": "^2.2.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-hook-form": "^7.70.0",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
@@ -53,7 +54,8 @@
     "vite": "^7.3.1",
     "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-package-version": "^1.1.0",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.16",
+    "vitest-localstorage-mock": "^0.1.2"
   },
   "engineStrict": true,
   "engines": {

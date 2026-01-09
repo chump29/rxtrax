@@ -22,10 +22,10 @@ def add(med: Med):
     return c(med)
 
 
-@api.get("/api/get")
-def get():
+@api.get("/api/get/{name}")
+def get(name: str):
     """Get medication"""
-    return r()
+    return r(name)
 
 
 @api.delete("/api/delete/{pk}")

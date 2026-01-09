@@ -22,7 +22,7 @@ echo -e "\n${_lint} ${_green}Linting${_nc}:"
 pnpm run lint
 
 echo -e "\n${_test} ${_green}Testing${_nc}:"
-#pnpm run test # TODO
+pnpm run test
 
 echo -e "${_image} ${_green}Creating image${_nc}:\n"
 docker build --tag=rx-frontend .

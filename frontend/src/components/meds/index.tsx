@@ -7,13 +7,7 @@ import type Med from "../../interfaces/Med"
 
 const api_url = import.meta.env.VITE_API_URL || ""
 
-export default function Meds({
-  id,
-  className
-}: {
-  id: string
-  className: string
-}) {
+export default function Meds({ className }: { className: string }) {
   const [name, setName] = useState("")
   const [strength, setStrength] = useState("")
 
@@ -42,6 +36,7 @@ export default function Meds({
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          name: localStorage.getItem("rxName"),
           medication: name,
           strength: strength
         } as Med)
@@ -58,7 +53,7 @@ export default function Meds({
 
   return (
     <>
-      <div id={id} className={className}>
+      <div id="compMeds" className={className}>
         <div className="text-center mt-10">
           <input
             type="text"
