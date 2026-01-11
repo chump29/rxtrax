@@ -31,7 +31,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/backend/.venv/bin:$PATH"
 
-HEALTHCHECK --interval=60s CMD source /backend/healthcheck.sh
+HEALTHCHECK --interval=60s --start-interval=5s CMD source /backend/healthcheck.sh
 
 EXPOSE 5556
 
