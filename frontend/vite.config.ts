@@ -1,11 +1,10 @@
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
-import { ViteImageOptimizer } from "vite-plugin-image-optimizer"
 import versionPlugin from "vite-plugin-package-version"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), versionPlugin(), ViteImageOptimizer()],
+  plugins: [react(), tailwindcss(), versionPlugin()],
   test: {
     environment: "jsdom",
     globals: true,
