@@ -1,4 +1,4 @@
-# ![RxTrax logo](/frontend/public/rx.png) RxTrax
+# ![RxTrax logo](/frontend/public/rxtrax.png) RxTrax
 
 * Choose prescription medications and dosage
 * Data will be stored in a SQLite database

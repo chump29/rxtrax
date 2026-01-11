@@ -1,8 +1,8 @@
 .prettier*
 *.sh
-dist
+dist/
 eslint.config.js
-node_modules
+node_modules/
 README.md
 
 !healthcheck.sh

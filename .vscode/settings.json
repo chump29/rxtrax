@@ -1,5 +1,7 @@
 {
+  "conventionalCommits.scopes": ["backend"],
   "css.lint.unknownAtRules": "ignore",
-  "python.terminal.activateEnvironment": true,
-  "conventionalCommits.scopes": ["backend"]
+  "python.analysis.typeCheckingMode": "strict",
+  "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python",
+  "python.terminal.activateEnvironment": true
 }

@@ -1,5 +1,5 @@
-__pycache__
-.venv
+__pycache__/
+.venv/
 *.db*
-dist
-node_modules
+dist/
+node_modules/

@@ -1,4 +1,4 @@
-#!/usr/bin/env -S docker build . --tag=rx-frontend --file
+#!/usr/bin/env -S docker build . --tag=rxtrax-frontend --file
 
 FROM node:alpine AS build
 

@@ -13,7 +13,7 @@ _done="✔️ "
 
 clear
 
-echo -e "${_title} ${_red}FRONTEND${_nc} ${_title}\n\n"
+echo -e "${_title} ${_red}RxTrax FRONTEND${_nc} ${_title}\n\n"
 
 echo -e "${_task} ${_green}Installing dependencies${_nc}:\n"
 pnpm install --frozen-lockfile
@@ -25,7 +25,7 @@ echo -e "\n${_test} ${_green}Testing${_nc}:"
 pnpm run test
 
 echo -e "${_image} ${_green}Creating image${_nc}:\n"
-docker build --tag=rx-frontend .
+docker build --tag=rxtrax-frontend .
 
 echo -e "\n${_done} ${_yellow}Done${_nc}!\n"
 

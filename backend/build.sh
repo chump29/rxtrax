@@ -15,7 +15,7 @@ _done="✔️ "
 
 clear
 
-echo -e "${_title} ${_red}BACKEND${_nc} ${_title}\n\n"
+echo -e "${_title} ${_red}RxTrax BACKEND${_nc} ${_title}\n\n"
 
 echo -e "${_start} ${_green}Activating virtual environment${_nc}\n"
 source .venv/bin/activate
@@ -33,7 +33,7 @@ echo -e "\n${_stop} ${_green}Deactivating virtual environment${_nc}\n"
 deactivate
 
 echo -e "${_image} ${_green}Creating image${_nc}:\n"
-docker build --tag=rx-backend .
+docker build --tag=trax-backend .
 
 echo -e "\n${_done} ${_yellow}Done${_nc}!\n"
 

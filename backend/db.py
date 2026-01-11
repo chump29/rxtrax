@@ -8,7 +8,7 @@ from os import path
 from peewee import AutoField, CharField, Model, SqliteDatabase
 from pydantic import BaseModel
 
-DB_FILE = "rx.db"
+DB_FILE = "rxtrax.db"
 
 DEBUG = False
 

@@ -1,7 +1,7 @@
-__pycache__
-.db*
+__pycache__/
+*.db*
 .python-version
-.venv
+.venv/
 *.sh
 README.md
 

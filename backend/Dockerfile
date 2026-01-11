@@ -1,4 +1,4 @@
-#!/usr/bin/env -S docker build . --tag=rx-backend --file
+#!/usr/bin/env -S docker build . --tag=rxtrax-backend --file
 
 FROM ghcr.io/astral-sh/uv:python3.14-alpine AS build
 

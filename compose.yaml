@@ -1,10 +1,10 @@
 services:
-  rx-frontend:
-    container_name: rx-frontend
-    image: rx-frontend
+  rxtrax-frontend:
+    container_name: rxtrax-frontend
+    image: rxtrax-frontend
     restart: unless-stopped
     depends_on:
-      - rx-backend
+      - rxtrax-backend
     ports:
       - "90:80"
     environment:
@@ -14,13 +14,13 @@ services:
       - dockge.imageupdates.check=false
       - homepage.group=Personal
       - homepage.name=RxTrax
-      - homepage.icon=https://rx.postfmly.com/rx.png
+      - homepage.icon=https://rx.postfmly.com/rxtrax.png
       - homepage.href=https://rx.postfmly.com/
       - homepage.description=rx.postfmly.com
 
-  rx-backend:
-    container_name: rx-backend
-    image: rx-backend
+  rxtrax-backend:
+    container_name: rxtrax-backend
+    image: rxtrax-backend
     restart: unless-stopped
     ports:
       - "5556:5556"
