@@ -1,4 +1,4 @@
-# <img src="./frontend/public/rxtrax.png" alt="RxTrax logo" title="RxTrax" width="64" height="64" /> RxTrax
+# <img src="./frontend/public/rxtrax.png" alt="RxTrax logo" title="RxTrax" width="64" height="64"> RxTrax
 
 - Choose prescription medications and dosage
 - Data will be stored in a SQLite database
