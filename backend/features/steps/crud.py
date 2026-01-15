@@ -1,6 +1,7 @@
 #!.venv/bin/python
 
 # pylint: skip-file
+# type: ignore
 
 from behave import given, then, when
 

@@ -1,6 +1,7 @@
 #!.venv/bin/python
 
 # pylint: skip-file
+# type: ignore
 
 from behave import given, then, when
 from tomllib import load
@@ -17,7 +18,7 @@ def step_impl(context):
 @when("/version API endpoint is called")
 def step_impl(context):
     context.version = get_version()
-    assert context.failed is not True, "/get_version call failed"
+    assert context.failed is not True, "/version call failed"
 
 
 @then("version is returned")
