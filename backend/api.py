@@ -8,12 +8,10 @@ from tomllib import load
 from fastapi import FastAPI
 from uvicorn import run
 
-from db import add as c, create, delete as d, get as r, Med
+from db import add as c, delete as d, get as r, Med
 
 
 api = FastAPI()
-
-create()
 
 
 @api.post("/api/add")

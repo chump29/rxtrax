@@ -24,10 +24,16 @@ services:
     restart: unless-stopped
     ports:
       - "5556:5556"
+    volumes:
+      - db:/backend/db
     labels:
       - wud.watch=false
       - dockge.imageupdates.check=false
     stop_signal: SIGINT
+
+volumes:
+  db:
+
 networks: {}
 
 x-dockge:

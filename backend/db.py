@@ -3,11 +3,12 @@
 """DB Service"""
 
 from dataclasses import dataclass
-from os import path
+from os import makedirs, path
 
 from peewee import AutoField, CharField, Model, SqliteDatabase
 from pydantic import BaseModel
 
+DB_PATH = "./db/"
 DB_FILE = "rxtrax.db"
 
 DEBUG = False
@@ -35,17 +36,20 @@ class Rx(Model):
         """Metadata"""
 
         database = SqliteDatabase(
-            DB_FILE,
+            DB_PATH + DB_FILE,
             pragmas={"journal_mode": "wal"},
         )
 
+if not path.exists(DB_PATH):
+    if DEBUG:
+        print(f"Creating path: {DB_PATH}")
+    makedirs(DB_PATH)
 
-def create():
-    """Create tables"""
-    if not path.exists(DB_FILE):
-        if DEBUG:
-            print("Creating database")
-        Rx.create_table()
+
+if not path.exists(DB_PATH + DB_FILE):
+    if DEBUG:
+        print("Creating database")
+    Rx.create_table()
 
 
 def add(med: Med):  # c

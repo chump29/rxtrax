@@ -1,8 +1,9 @@
 __pycache__/
-*.db*
 .python-version
 .venv/
 *.sh
+db/
+features/
 README.md
 
 !healthcheck.sh
