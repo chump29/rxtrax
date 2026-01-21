@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en" class="dark">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RxTrax</title>
-    <link rel="stylesheet" href="./index.css">
     <link rel="icon" href="rxtrax.png">
+    <link rel="stylesheet" href="index.css">
+    <meta charset="utf-8">
+    <meta name="robots" content="none">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
+    <title><%= title %></title>
   </head>
   <body class="dark:bg-gray-800">
     <main>
       <div
         class="font-bold text-[#00cc00] text-7xl text-center font-[Chango] pt-10">
-        <img src="rxtrax.png" alt="RxTrax logo" title="RxTrax" class="inline">
-        RxTrax
+        <img
+          src="rxtrax.png"
+          alt="<%= title %> logo"
+          title="<%= title %>"
+          class="inline">
+        <%= title %>
       </div>
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <div id="root"></div>
@@ -51,9 +56,9 @@
     </main>
     <footer
       class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-[100%] italic">
-      UI
+      UI &nbsp;
       <span id="frontend"></span>
-      &nbsp; &middot; &nbsp; API
+      &nbsp; &middot; &nbsp; API &nbsp;
       <span id="backend"></span>
     </footer>
   </body>

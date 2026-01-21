@@ -1,18 +1,27 @@
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
-import versionPlugin from "vite-plugin-package-version"
+import version from "vite-plugin-package-version"
+import simpleHtml from "vite-plugin-simple-html"
 import webFontDownload from "vite-plugin-webfont-dl"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
   plugins: [
     react(),
+    simpleHtml({
+      inject: {
+        data: {
+          title: "RxTrax"
+        }
+      },
+      minify: true
+    }),
     tailwindcss(),
     webFontDownload(
       ["https://fonts.googleapis.com/css2?family=Chango&display=swap"],
       { assetsSubfolder: "fonts", injectAsStyleTag: false }
     ),
-    versionPlugin()
+    version()
   ],
   test: {
     environment: "jsdom",
