@@ -47,7 +47,7 @@ export default function Meds({ className }: { className: string }) {
         window.location.reload()
       })
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
 
