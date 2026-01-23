@@ -1,8 +1,10 @@
 __pycache__/
+.dockerignoer
 .python-version
 .venv/
 *.sh
 db/
+Dockerfile
 features/
 README.md
 

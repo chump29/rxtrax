@@ -93,6 +93,11 @@ uv cache clean
 ### Virtual environment:
 
 ```bash
+# Create
+uv venv
+# or
+uv venv -p [version]
+
 # Activate
 source .venv/bin/activate
 
