@@ -50,12 +50,9 @@ source-exclude = [
     ".dockerignore",
     ".python-version",
     "*.sh",
-    "/__pycache__",
-    "/.venv",
     "/db",
     "/features",
     "Dockerfile",
     "README.md",
     "uv.lock"
 ]
-

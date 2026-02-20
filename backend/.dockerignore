@@ -1,8 +1,9 @@
 __pycache__/
-.dockerignoer
+.dockerignore
 .python-version
 .venv/
 *.sh
+api.rest
 db/
 Dockerfile
 features/

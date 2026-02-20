@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { type JSX, useEffect, useState } from "react"
 
 import {
   ExclamationTriangleIcon,
@@ -13,32 +13,36 @@ import type Med from "../../interfaces/Med"
 import Login from "../login"
 import Meds from "../meds"
 
-import "./index.css"
 import "react-confirm-alert/src/react-confirm-alert.css"
+import "./index.css"
 
-const api_url = import.meta.env.VITE_API_URL || ""
+const api_url: string = import.meta.env.VITE_API_URL || ""
 
-export default function Display() {
+export default function Display(): JSX.Element {
   const [medications, setMedications] = useState<Med[]>([])
-  const [rxName, setRxName] = useState("")
+  const [rxName, setRxName] = useState<string>("")
 
-  function toggleVisibility() {
+  const toggleVisibility = (): void => {
     ;["btnAddMed", "btnCancelMed", "compMeds"].forEach((element) => {
       document.getElementById(element)!.classList.toggle("hidden")
     })
   }
 
-  function handleClick() {
+  const handleClick = (): void => {
     toggleVisibility()
     handleX("rxName")
     handleX("rxStrength")
   }
 
-  function handleDelete(pk: number) {
+  const handleDelete = (pk: number): void => {
     if (pk === 0) {
       return
     }
+
     confirmAlert({
+      closeOnClickOutside: true,
+      closeOnEscape: true,
+      overlayClassName: "overlay",
       title: "Delete medication?",
       buttons: [
         {
@@ -48,29 +52,30 @@ export default function Display() {
               method: "DELETE",
               signal: AbortSignal.timeout(3000)
             })
-              .then((response) => {
+              .then((response: Response) => {
                 if (!response.ok) {
                   throw new Error(`Status: ${response.status}`)
                 }
                 window.location.reload()
               })
-              .catch((e) => {
-                console.error(e)
-              })
+              .catch(console.error)
           }
         },
         {
           label: "No"
         }
-      ],
-      closeOnEscape: true,
-      closeOnClickOutside: true,
-      overlayClassName: "overlay"
+      ]
     })
   }
 
+  const logout = (): void => {
+    localStorage.removeItem("rxName")
+    setRxName("")
+    window.location.reload()
+  }
+
   useEffect(() => {
-    const name = localStorage.getItem("rxName") || ""
+    const name: string = localStorage.getItem("rxName") || ""
     setRxName(name)
     if (!name.length) {
       return
@@ -79,7 +84,7 @@ export default function Display() {
       method: "GET",
       signal: AbortSignal.timeout(3000)
     })
-      .then((response) => {
+      .then((response: Response) => {
         if (!response.ok) {
           throw new Error(`Status: ${response.status}`)
         }
@@ -88,16 +93,8 @@ export default function Display() {
       .then((meds: Med[]) => {
         setMedications(meds)
       })
-      .catch((e) => {
-        console.error(e)
-      })
+      .catch(console.error)
   }, [])
-
-  function logout() {
-    localStorage.removeItem("rxName")
-    setRxName("")
-    window.location.reload()
-  }
 
   return (
     <>
@@ -111,8 +108,8 @@ export default function Display() {
               {rxName}
               <XCircleIcon
                 className="ml-1 size-4 inline text-red-500 cursor-pointer"
-                title="Logout"
                 onClick={logout}
+                title="Logout"
               />
             </span>
           </div>
@@ -128,10 +125,13 @@ export default function Display() {
                   <>
                     <div className="col-span-1">
                       <button
-                        type="button"
-                        onClick={() => handleDelete(Number(medication.id))}
+                        className="cursor-pointer"
+                        onClick={(): void =>
+                          handleDelete(Number(medication.id))
+                        }
                         title="Delete medication"
-                        className="cursor-pointer">
+                        type="button"
+                      >
                         <TrashIcon className="size-6 text-red-500 inline align-bottom" />
                       </button>
                     </div>
@@ -148,20 +148,22 @@ export default function Display() {
           </div>
           <div className="text-center mt-10">
             <button
+              className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold"
               id="btnAddMed"
-              type="button"
               onClick={handleClick}
               title="Add medication"
-              className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold">
+              type="button"
+            >
               <PlusCircleIcon className="size-6 inline text-green-500" /> Add
               Medication
             </button>
             <button
+              className="cursor-pointer border-1 border-red-500 rounded-md text-white px-2 py-1 font-bold hidden"
               id="btnCancelMed"
-              type="button"
               onClick={handleClick}
               title="Cancel"
-              className="cursor-pointer border-1 border-red-500 rounded-md text-white px-2 py-1 font-bold hidden">
+              type="button"
+            >
               <XCircleIcon className="size-6 inline text-red-500" /> Cancel
             </button>
             <Meds className="hidden" />

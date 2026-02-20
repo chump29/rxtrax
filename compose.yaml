@@ -1,7 +1,7 @@
 services:
   rxtrax-frontend:
     container_name: rxtrax-frontend
-    image: rxtrax-frontend
+    image: git.postfmly.com/admin/rxtrax-frontend:arm64
     restart: unless-stopped
     depends_on:
       - rxtrax-backend
@@ -10,8 +10,7 @@ services:
     environment:
       - TZ=America/Chicago
     labels:
-      - wud.watch=false
-      - dockge.imageupdates.check=false
+      - wud.display.name=RxTrax (Frontend)
       - homepage.group=Personal
       - homepage.name=RxTrax
       - homepage.icon=https://rx.postfmly.com/rxtrax.png
@@ -20,15 +19,14 @@ services:
 
   rxtrax-backend:
     container_name: rxtrax-backend
-    image: rxtrax-backend
+    image: git.postfmly.com/admin/rxtrax-backend:arm64
     restart: unless-stopped
     ports:
       - "5556:5556"
     volumes:
       - db:/backend/db
     labels:
-      - wud.watch=false
-      - dockge.imageupdates.check=false
+      - wud.display.name=RxTrax (Backend)
     stop_signal: SIGINT
 
 volumes:

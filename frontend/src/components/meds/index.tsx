@@ -1,17 +1,21 @@
-import { useState, type ChangeEvent } from "react"
+import { type ChangeEvent, type JSX, useState } from "react"
 
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline"
 
 import { handleX, setVisible } from "../../helpers/handle"
 import type Med from "../../interfaces/Med"
 
-const api_url = import.meta.env.VITE_API_URL || ""
+const api_url: string = import.meta.env.VITE_API_URL || ""
 
-export default function Meds({ className }: { className: string }) {
-  const [name, setName] = useState("")
-  const [strength, setStrength] = useState("")
+export default function Meds({
+  className
+}: {
+  className: string
+}): JSX.Element {
+  const [name, setName] = useState<string>("")
+  const [strength, setStrength] = useState<string>("")
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (
       e.target.id === "rxName" &&
       document.getElementById("rxStrength")!.dataset.state === "valid"
@@ -27,73 +31,74 @@ export default function Meds({ className }: { className: string }) {
     }
   }
 
-  function handleAdd() {
-    try {
-      fetch(api_url + "/api/add", {
-        method: "POST",
-        signal: AbortSignal.timeout(3000),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: localStorage.getItem("rxName"),
-          medication: name,
-          strength: strength
-        } as Med)
-      }).then((response) => {
+  const handleAdd = (): void => {
+    fetch(api_url + "/api/add", {
+      body: JSON.stringify({
+        medication: name,
+        name: localStorage.getItem("rxName"),
+        strength: strength
+      } as Med),
+      method: "POST",
+      signal: AbortSignal.timeout(3000),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response: Response) => {
         if (!response.ok) {
           throw new Error(`Status: ${response.status}`)
         }
         window.location.reload()
       })
-    } catch (e) {
-      console.error(e)
-    }
+      .catch(console.error)
   }
 
   return (
     <>
-      <div id="compMeds" className={className}>
+      <div className={className} id="compMeds">
         <div className="text-center mt-10">
           <input
-            type="text"
+            className="border-2 border-green-500 w-100 rounded-md text-white text-center"
             id="rxName"
+            onBlur={handleChange}
             placeholder="Enter medication..."
-            onBlur={handleChange}
-            className="border-2 border-green-500 w-100 rounded-md text-white text-center"
-          />{" "}
-          &nbsp;
-          <button
-            type="button"
-            onClick={() => handleX("rxName")}
-            title="Clear medication"
-            className="cursor-pointer">
-            <TrashIcon className="size-6 text-red-500 inline align-bottom" />
-          </button>
-        </div>
-        <div id="txtStrength" className="text-center mt-10 invisible">
-          <input
             type="text"
-            id="rxStrength"
-            placeholder="Enter strength..."
-            onBlur={handleChange}
-            className="border-2 border-green-500 w-100 rounded-md text-white text-center"
           />{" "}
           &nbsp;
           <button
+            className="cursor-pointer"
+            onClick={(): void => handleX("rxName")}
+            title="Clear medication"
             type="button"
-            onClick={() => handleX("rxStrength")}
-            title="Clear strength"
-            className="cursor-pointer">
+          >
             <TrashIcon className="size-6 text-red-500 inline align-bottom" />
           </button>
         </div>
-        <div id="btnAdd" className="text-center mt-10 invisible">
+        <div className="text-center mt-10 invisible" id="txtStrength">
+          <input
+            className="border-2 border-green-500 w-100 rounded-md text-white text-center"
+            id="rxStrength"
+            onBlur={handleChange}
+            placeholder="Enter strength..."
+            type="text"
+          />{" "}
+          &nbsp;
           <button
+            className="cursor-pointer"
+            onClick={(): void => handleX("rxStrength")}
+            title="Clear strength"
             type="button"
+          >
+            <TrashIcon className="size-6 text-red-500 inline align-bottom" />
+          </button>
+        </div>
+        <div className="text-center mt-10 invisible" id="btnAdd">
+          <button
+            className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold"
             onClick={handleAdd}
             title="Add medication and strength"
-            className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold">
+            type="button"
+          >
             <PlusCircleIcon className="size-6 inline text-green-500" /> Add
           </button>
         </div>

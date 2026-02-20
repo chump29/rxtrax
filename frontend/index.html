@@ -1,65 +1,64 @@
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <link rel="icon" href="rxtrax.png">
-    <link rel="stylesheet" href="index.css">
-    <meta charset="utf-8">
-    <meta name="robots" content="none">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
-    <title><%= title %></title>
-  </head>
-  <body class="dark:bg-gray-800">
-    <main>
-      <div
-        class="font-bold text-[#00cc00] text-7xl text-center font-[Chango] pt-10">
-        <img
-          src="rxtrax.png"
-          alt="<%= title %> logo"
-          title="<%= title %>"
-          class="inline">
-        <%= title %>
-      </div>
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
-      <script type="module" src="./src/main.tsx"></script>
-      <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/19.2.4/autocomplete-lhc.min.js"></script>
-      <script>
-        $(function () {
-          const strength = $("#rxStrength")
-          if (!strength.length) {
-            return
+
+<head>
+  <link rel="icon" href="rxtrax.png">
+  <link rel="stylesheet" href="index.css">
+  <meta charset="utf-8">
+  <meta name="robots" content="none">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body class="dark:bg-gray-800">
+  <main>
+    <div class="font-bold text-[#00cc00] text-7xl text-center font-[Chango] pt-10">
+      <img src="rxtrax.png" alt="<%= title %> logo" title="<%= title %>" class="inline">
+      <%= title %>
+    </div>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+    <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/19.2.4/autocomplete-lhc.min.js"></script>
+    <script>
+      $(function () {
+        const strength = $("#rxStrength")
+        if (!strength.length) {
+          return
+        }
+        new Def.Autocompleter.Prefetch("rxStrength", [])
+        new Def.Autocompleter.Search(
+          "rxName",
+          "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS"
+        )
+        Def.Autocompleter.Event.observeListSelections("rxName", function () {
+          const autocomp = $("#rxName")[0].autocomp
+          const item = autocomp.getSelectedItemData()
+          if (item && item[0].data) {
+            strength[0].autocomp.setListAndField(
+              item[0].data["STRENGTHS_AND_FORMS"],
+              ""
+            )
+            strength.attr("data-state", "valid")
+            autocomp.element.blur()
+          } else {
+            strength[0].autocomp.setListAndField("")
+            $("#txtStrength").hide()
+            strength.attr("data-state", "invalid")
           }
-          new Def.Autocompleter.Prefetch("rxStrength", [])
-          new Def.Autocompleter.Search(
-            "rxName",
-            "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS"
-          )
-          Def.Autocompleter.Event.observeListSelections("rxName", function () {
-            const autocomp = $("#rxName")[0].autocomp
-            const item = autocomp.getSelectedItemData()
-            if (item && item[0].data) {
-              strength[0].autocomp.setListAndField(
-                item[0].data["STRENGTHS_AND_FORMS"],
-                ""
-              )
-              strength.attr("data-state", "valid")
-              autocomp.element.blur()
-            } else {
-              strength[0].autocomp.setListAndField("")
-              $("#txtStrength").hide()
-              strength.attr("data-state", "invalid")
-            }
-          })
         })
-      </script>
-    </main>
-    <footer
-      class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-[100%] italic">
-      UI &nbsp;
-      <span id="frontend"></span>
-      &nbsp; &middot; &nbsp;API &nbsp;
-      <span id="backend"></span>
-    </footer>
-  </body>
+      })
+    </script>
+  </main>
+  <footer class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-[100%] italic">
+    UI &nbsp;
+    <span id="frontend"></span>
+    &nbsp; &middot; &nbsp;API &nbsp;
+    <span id="backend"></span>
+  </footer>
+</body>
+
 </html>

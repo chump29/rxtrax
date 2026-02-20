@@ -1,10 +1,10 @@
-export function setVisible(id: string, isVisibility = true) {
+export const setVisible = (id: string, isVisibility: boolean = true): void => {
   document.getElementById(id)!.style.visibility = isVisibility
     ? "visible"
     : "hidden"
 }
 
-export function handleX(obj: string) {
+export const handleX = (obj: string): void => {
   const rxName = document.getElementById("rxName") as HTMLInputElement
   if (obj === "rxName" && rxName.value) {
     rxName.value = ""

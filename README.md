@@ -1,16 +1,18 @@
-# <img src="./frontend/public/rxtrax.png" alt="RxTrax logo" title="RxTrax" width="64" height="64"> RxTrax
+# <img src="./frontend/public/rxtrax.png" title="RxTrax" alt="RxTrax logo" width="64" height="64"> RxTrax
 
-- Choose prescription medications and dosage
-- Data will be stored in a SQLite database
-- Detailed information will be displayed
+> - Choose prescription medications and dosage
+> - Data will be stored in a SQLite database
+> - Detailed information will be displayed
 
-# Compose flowchart
+---
+
+### Docker Compose Flow: <!-- markdownlint-disable-line MD001 -->
 
 ```mermaid
 flowchart LR
-frontend@{shape: rounded, label: "frontend"}
+frontend@{shape: rounded, label: "rxtrax-frontend:80"}
 frontendPort@{shape: rounded, label: "http://localhost:90"}
-backend@{shape: rounded, label: "backend (direct)"}
+backend@{shape: rounded, label: "rxtrax-backend:5556"}
 backendPort@{shape: rounded, label: "http://localhost:5556"}
 frontend-->frontendPort
 backend-->backendPort
@@ -18,36 +20,15 @@ backend-->backendPort
 
 ---
 
-# Development stuff
-
-### Backend:
+### To build all images
 
 ```bash
-cd backend
-pip-compile --extra dev
-pip-sync
-python api.py &
-```
-
-### Frontend:
-
-```bash
-cd frontend
-pnpm i
-pnpm run build:dev
-```
-
-# Docker stuff
-
-### To build images:
-
-```bash
-# All
 ./build.sh
-
-# Backend
-cd backend && ./build.sh
-
-# Frontend
-cd frontend && ./build.sh
 ```
+
+---
+
+### Additional documentation available
+
+- [Frontend](./backend/README.md "Frontend")
+- [Backend](./frontend/README.md "Backend")

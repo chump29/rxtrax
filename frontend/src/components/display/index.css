@@ -3,19 +3,19 @@
 }
 
 .react-confirm-alert-body {
-  background-color: #1e2939 !important;
-  border: 1px outset #00cc00;
-  color: #fff !important;
   font-weight: bold;
+  color: #fff !important;
   text-align: center !important;
+  background-color: #1e2939 !important;
+  border: 1px outset #0c0;
 }
 
 .react-confirm-alert-button-group {
-  text-align: center !important;
   display: block !important;
+  text-align: center !important;
 }
 
 .react-confirm-alert-button-group button {
   background-color: #1e2939 !important;
-  border: 1px inset #00cc00 !important;
+  border: 1px inset #0c0 !important;
 }
