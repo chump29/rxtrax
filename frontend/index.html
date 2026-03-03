@@ -24,7 +24,7 @@
     <script type="module" src="./src/main.tsx"></script>
     <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/19.2.4/autocomplete-lhc.min.js"></script>
     <script>
-      $(function () {
+      $(() => {
         const strength = $("#rxStrength")
         if (!strength.length) {
           return
@@ -34,12 +34,12 @@
           "rxName",
           "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS"
         )
-        Def.Autocompleter.Event.observeListSelections("rxName", function () {
+        Def.Autocompleter.Event.observeListSelections("rxName", () => {
           const autocomp = $("#rxName")[0].autocomp
           const item = autocomp.getSelectedItemData()
           if (item && item[0].data) {
             strength[0].autocomp.setListAndField(
-              item[0].data["STRENGTHS_AND_FORMS"],
+              item[0].data.STRENGTHS_AND_FORMS,
               ""
             )
             strength.attr("data-state", "valid")
@@ -53,7 +53,7 @@
       })
     </script>
   </main>
-  <footer class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-[100%] italic">
+  <footer class="text-center text-xs text-gray-200/75 bg-slate-700 fixed bottom-0 w-full italic">
     UI &nbsp;
     <span id="frontend"></span>
     &nbsp; &middot; &nbsp;API &nbsp;
