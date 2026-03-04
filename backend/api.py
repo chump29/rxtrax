@@ -12,7 +12,9 @@ from uvicorn import run
 from db import add as c, delete as d, get as r, Med
 
 
-api = FastAPI()
+api = FastAPI(
+    docs_url="/api/docs", openapi_url="/api/openapi.json", redoc_url="/api/redoc"
+)
 
 
 @api.post("/api/add")
