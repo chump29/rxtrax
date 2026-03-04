@@ -23,7 +23,7 @@ api-->delete
 api-->get
 api-->update
 api-->version
-port@{shape: brace, label: "&nbsp; Uvicorn exposes port 5556"}
+port@{shape: brace, label: "&nbsp; FastAPI exposes port 5556"}
 ```
 
 ---
@@ -81,6 +81,13 @@ port@{shape: brace, label: "&nbsp; Uvicorn exposes port 5556"}
 |:-------:|:---------------------------------------:|:------------------:|
 |   DEV   | `uv run fastapi dev api.py --port 5556` |     `./api.py`     |
 |  PROD   | `uv run fastapi run api.py --port 5556` |      &mdash;       |
+
+#### API Documentation:
+
+|  📄 UI  |    🌐 URL    |
+|:-------:|:------------:|
+| Swagger | `/api/docs`  |
+|  Redoc  | `/api/redoc` |
 
 #### Docker Deployment:
 
