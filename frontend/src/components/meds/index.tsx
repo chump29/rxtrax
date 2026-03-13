@@ -7,19 +7,12 @@ import type Med from "../../interfaces/Med"
 
 const api_url: string = import.meta.env.VITE_API_URL || ""
 
-export default function Meds({
-  className
-}: {
-  className: string
-}): JSX.Element {
+export default function Meds({ className }: { className: string }): JSX.Element {
   const [name, setName] = useState<string>("")
   const [strength, setStrength] = useState<string>("")
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (
-      e.target.id === "rxName" &&
-      document.getElementById("rxStrength")!.dataset.state === "valid"
-    ) {
+    if (e.target.id === "rxName" && document.getElementById("rxStrength")!.dataset.state === "valid") {
       setName(e.target.value)
       setVisible("txtStrength")
     } else if (e.target.id === "rxStrength" && e.target.value.length > 0) {
@@ -69,8 +62,7 @@ export default function Meds({
             className="cursor-pointer"
             onClick={(): void => handleX("rxName")}
             title="Clear medication"
-            type="button"
-          >
+            type="button">
             <TrashIcon className="size-6 text-red-500 inline align-bottom" />
           </button>
         </div>
@@ -87,8 +79,7 @@ export default function Meds({
             className="cursor-pointer"
             onClick={(): void => handleX("rxStrength")}
             title="Clear strength"
-            type="button"
-          >
+            type="button">
             <TrashIcon className="size-6 text-red-500 inline align-bottom" />
           </button>
         </div>
@@ -97,8 +88,7 @@ export default function Meds({
             className="cursor-pointer border-1 border-green-500 rounded-md text-white px-2 py-1 font-bold"
             onClick={handleAdd}
             title="Add medication and strength"
-            type="button"
-          >
+            type="button">
             <PlusCircleIcon className="size-6 inline text-green-500" /> Add
           </button>
         </div>

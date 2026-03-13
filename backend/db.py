@@ -62,8 +62,8 @@ def add(med: Med):  # c
 def get(name: str):  # r
     """Get medication"""
     if DEBUG:
-        print(f"Getting rows: {Rx.select(Rx.name == name).count(None)}")
-    return list(Rx.select().dicts())
+        print(f"Getting rows for {name}: {Rx.select().where(Rx.name == name).count(None)}")
+    return list(Rx.select().where(Rx.name == name).dicts())
 
 
 def delete(pk: int):  # d

@@ -5,3 +5,4 @@ Feature: Get user medications
       When /get API endpoint is called with a user
       Then medication data is returned
         And the user matches
+        And delete test data

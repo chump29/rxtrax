@@ -1,11 +1,6 @@
 import { type JSX, useEffect, useState } from "react"
 
-import {
-  ExclamationTriangleIcon,
-  PlusCircleIcon,
-  TrashIcon,
-  XCircleIcon
-} from "@heroicons/react/24/outline"
+import { ExclamationTriangleIcon, PlusCircleIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import { confirmAlert } from "react-confirm-alert"
 
 import { handleX } from "../../helpers/handle"
@@ -23,7 +18,11 @@ export default function Display(): JSX.Element {
   const [rxName, setRxName] = useState<string>("")
 
   const toggleVisibility = (): void => {
-    ;["btnAddMed", "btnCancelMed", "compMeds"].forEach((element) => {
+    ;[
+      "btnAddMed",
+      "btnCancelMed",
+      "compMeds"
+    ].forEach((element) => {
       document.getElementById(element)!.classList.toggle("hidden")
     })
   }
@@ -106,18 +105,13 @@ export default function Display(): JSX.Element {
             <span className="text-green-500">User: </span>
             <span className="text-white">
               {rxName}
-              <XCircleIcon
-                className="ml-1 size-4 inline text-red-500 cursor-pointer"
-                onClick={logout}
-                title="Logout"
-              />
+              <XCircleIcon className="ml-1 size-4 inline text-red-500 cursor-pointer" onClick={logout} title="Logout" />
             </span>
           </div>
           <div className="mx-auto w-200 mt-10">
             {!medications.length ? (
               <div className="text-center text-white font-bold text-2xl italic">
-                <ExclamationTriangleIcon className="size-7 inline text-red-500" />{" "}
-                No medications to show
+                <ExclamationTriangleIcon className="size-7 inline text-red-500" /> No medications to show
               </div>
             ) : (
               <div className="grid grid-cols-12 gap-2 border-2 border-green-500 text-white rounded-md font-bold p-2">
@@ -126,21 +120,14 @@ export default function Display(): JSX.Element {
                     <div className="col-span-1">
                       <button
                         className="cursor-pointer"
-                        onClick={(): void =>
-                          handleDelete(Number(medication.id))
-                        }
+                        onClick={(): void => handleDelete(Number(medication.id))}
                         title="Delete medication"
-                        type="button"
-                      >
+                        type="button">
                         <TrashIcon className="size-6 text-red-500 inline align-bottom" />
                       </button>
                     </div>
-                    <div className="text-left pl-2 col-span-6">
-                      {medication.medication}
-                    </div>
-                    <div className="text-right pr-2 col-span-5">
-                      {medication.strength}
-                    </div>
+                    <div className="text-left pl-2 col-span-6">{medication.medication}</div>
+                    <div className="text-right pr-2 col-span-5">{medication.strength}</div>
                   </>
                 ))}
               </div>
@@ -152,18 +139,15 @@ export default function Display(): JSX.Element {
               id="btnAddMed"
               onClick={handleClick}
               title="Add medication"
-              type="button"
-            >
-              <PlusCircleIcon className="size-6 inline text-green-500" /> Add
-              Medication
+              type="button">
+              <PlusCircleIcon className="size-6 inline text-green-500" /> Add Medication
             </button>
             <button
               className="cursor-pointer border-1 border-red-500 rounded-md text-white px-2 py-1 font-bold hidden"
               id="btnCancelMed"
               onClick={handleClick}
               title="Cancel"
-              type="button"
-            >
+              type="button">
               <XCircleIcon className="size-6 inline text-red-500" /> Cancel
             </button>
             <Meds className="hidden" />
