@@ -6,13 +6,16 @@
 from behave import given, then, when
 
 from api import get
-from db import add as c, delete as d, Med
+from db import add as c, delete as d, get as r, Med
 
 USER = "TestMe"
 
 
 @given("that a user wants their medications")
 def step_impl(context):
+    rows = r(USER)
+    for row in rows:
+        d(row["id"])
     c(Med(name=USER, medication="Med1", strength="Strength1"))
     c(Med(name=USER, medication="Med2", strength="Strength2"))
     context.meds = get(USER)
@@ -31,9 +34,5 @@ def step_impl(context):
 @then("the user matches")
 def step_impl(context):
     assert context.meds[0]["name"] == USER, "User invalid"
-
-
-@then("delete test data")
-def step_impl(context):
     for med in context.meds:
         d(med["id"])
