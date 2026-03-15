@@ -3,7 +3,7 @@ import { type JSX } from "react"
 import { PlayCircleIcon } from "@heroicons/react/24/outline"
 import { useForm } from "react-hook-form"
 
-export default function Login(): JSX.Element {
+const Login = (): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -42,3 +42,5 @@ export default function Login(): JSX.Element {
     </>
   )
 }
+
+export default Login

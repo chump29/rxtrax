@@ -7,7 +7,7 @@ import type Med from "../../interfaces/Med"
 
 const api_url: string = import.meta.env.VITE_API_URL || ""
 
-export default function Meds({ className }: { className: string }): JSX.Element {
+const Meds = ({ className }: { className: string }): JSX.Element => {
   const [name, setName] = useState<string>("")
   const [strength, setStrength] = useState<string>("")
 
@@ -96,3 +96,5 @@ export default function Meds({ className }: { className: string }): JSX.Element 
     </>
   )
 }
+
+export default Meds

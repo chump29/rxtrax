@@ -13,7 +13,7 @@ import "./index.css"
 
 const api_url: string = import.meta.env.VITE_API_URL || ""
 
-export default function Display(): JSX.Element {
+const Display = (): JSX.Element => {
   const [medications, setMedications] = useState<Med[]>([])
   const [rxName, setRxName] = useState<string>("")
 
@@ -157,3 +157,5 @@ export default function Display(): JSX.Element {
     </>
   )
 }
+
+export default Display

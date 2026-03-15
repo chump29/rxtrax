@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.10.9,<0.11.0"]
+requires = ["uv_build>=0.10.10,<0.11.0"]
 build-backend = "uv_build"
 
 [project]
@@ -26,10 +26,10 @@ classifiers = [
 ]
 dependencies = [
     "fastapi[standard-no-fastapi-cloud-cli]>=0.135.1",
-    "peewee>=4.0.1",
+    "peewee>=4.0.2",
     "pydantic>=2.12.5",
 ]
-requires-python = ">= 3.14"
+requires-python = ">=3.14"
 
 [project.urls]
 GitHub = "https://github.com/chump29/rxtrax"
