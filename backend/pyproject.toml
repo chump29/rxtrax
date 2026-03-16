@@ -8,7 +8,7 @@ version = "1.2.0"
 description = "Prescription medication tracker (Backend)"
 license = "GPL-3.0-only"
 authors = [
-    {name = "Chris Post"}
+    {name = "Chris Post", email = "admin@postfmly.com"}
 ]
 keywords = ["prescription", "medication", "tracker"]
 classifiers = [

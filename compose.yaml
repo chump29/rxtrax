@@ -25,6 +25,8 @@ services:
       - "5556:5556"
     volumes:
       - db:/backend/db
+    environment:
+      - TZ=America/Chicago
     labels:
       - wud.display.name=RxTrax (Backend)
     stop_signal: SIGINT
